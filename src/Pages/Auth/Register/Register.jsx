@@ -14,7 +14,7 @@ const Register = () => {
     console.log("after Register: ", data);
   };
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center min-h-screen">
       <form onSubmit={handleSubmit(handleRegistration)}>
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           {/* email */}
