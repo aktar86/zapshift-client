@@ -1,16 +1,49 @@
-# React + Vite
+### map
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🗺️ Coverage Map – Interactive District Search & Navigation
 
-Currently, two official plugins are available:
+This feature provides an interactive map system that allows users to search any district in Bangladesh and instantly navigate to that location on the map. It is built using **React Leaflet**, offering a smooth and user-friendly way to visualize service coverage areas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔍 District Search
 
-## Expanding the ESLint configuration
+- Users can search any district by typing its name.
+- The map automatically navigates (flyTo animation) to the matched district.
+- Case-insensitive search ensures smooth user experience.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🗺️ Interactive Map
+
+- Fully powered by **React Leaflet**
+- Displays markers for all service center locations
+- Popup shows:
+  - District name
+  - Covered areas
+- Smooth zooming and navigation for a better map experience
+
+### 📡 Dynamic Data Loading
+
+- Coverage data is loaded through `useLoaderData()` from React Router
+- Automatically renders coordinates and markers for each service center
+
+---
+
+## 📦 Technologies Used
+
+- React.js
+- React Router
+- React Leaflet
+- Leaflet.js
+- Tailwind CSS _(optional for UI styling)_
+
+---
+
+## 📥 Installation (React Leaflet)
+
+Install React Leaflet and Leaflet in your project:
+
+```bash
+npm install react-leaflet leaflet
+```
