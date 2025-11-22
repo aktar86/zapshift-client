@@ -14,3 +14,5 @@
 // banner carosel
 //  npm i react-responsive-carousel
 // npm i swiper
+
+// npm install react-hook-form

@@ -7,6 +7,9 @@ import Story from "../Pages/AboutUs/AboutChild/Story";
 import Mission from "../Pages/AboutUs/AboutChild/Mission";
 import Success from "../Pages/AboutUs/AboutChild/Success";
 import Teams_others from "../Pages/AboutUs/AboutChild/Teams_others";
+import AuthLayout from "../Layout/AuthLayout";
+import Login from "../Pages/Auth/Login/Login";
+import Register from "../Pages/Auth/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +46,20 @@ const router = createBrowserRouter([
             Component: Teams_others,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: "/",
+    Component: AuthLayout,
+    children: [
+      {
+        path: "login",
+        Component: Login,
+      },
+      {
+        path: "register",
+        Component: Register,
       },
     ],
   },
