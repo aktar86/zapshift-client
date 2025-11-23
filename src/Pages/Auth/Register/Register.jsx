@@ -33,7 +33,11 @@ const Register = () => {
           <label className="label">Password</label>
           <input
             type="password"
-            {...register("password")}
+            {...register("password", {
+              required: true,
+              pattern:
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z@$!%*?&]+$/,
+            })}
             className="input"
             placeholder="Password"
           />
