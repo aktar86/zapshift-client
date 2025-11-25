@@ -10,6 +10,8 @@ import Teams_others from "../Pages/AboutUs/AboutChild/Teams_others";
 import AuthLayout from "../Layout/AuthLayout";
 import Login from "../Pages/Auth/Login/Login";
 import Register from "../Pages/Auth/Register/Register";
+import PrivetRouter from "../privetRouter/PrivetRouter";
+import BeARider from "../Pages/BeARider/BeARider";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +21,14 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: "be_a_rider",
+        element: (
+          <PrivetRouter>
+            <BeARider></BeARider>
+          </PrivetRouter>
+        ),
       },
       {
         path: "coverage",

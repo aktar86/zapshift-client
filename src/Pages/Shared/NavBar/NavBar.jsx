@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useLocation } from "react-router";
+import { Link, NavLink } from "react-router";
 import Logo from "../../../components/Logo/Logo";
 import useAuth from "../../../hook/useAuth";
 
@@ -73,9 +73,17 @@ const NavBar = () => {
         {/* end */}
         <div className="navbar-end">
           {user ? (
-            <a onClick={handleSignOut} className="btn bg-secondary text-white">
-              Sign Out
-            </a>
+            <>
+              <a
+                onClick={handleSignOut}
+                className="btn bg-secondary text-white"
+              >
+                Sign Out
+              </a>
+              <Link to="/be_a_rider" className="btn bg-secondary text-white">
+                Be A Rider
+              </Link>{" "}
+            </>
           ) : (
             <>
               <Link to="/login" className="btn bg-secondary text-white">
@@ -83,6 +91,9 @@ const NavBar = () => {
               </Link>
               <Link to="/register" className="btn bg-secondary text-white">
                 Register
+              </Link>
+              <Link to="/be_a_rider" className="btn bg-secondary text-white">
+                Be A Rider
               </Link>
             </>
           )}

@@ -1,11 +1,14 @@
 import React from "react";
 import useAuth from "../../../hook/useAuth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import SocialLogin from "../../../socialLogin/socialLogin";
 
 const Login = () => {
   const { signInUser } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
 
   const {
     register,
@@ -13,11 +16,13 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  //Email password authentication sign in
   const handleSignIn = (data) => {
     console.log(data);
     signInUser(data.email, data.password)
       .then((result) => {
         console.log("Logged in:", result.user);
+        navigate(location?.state || "/");
         alert("Login Successful!");
       })
       .catch((err) => {
@@ -80,7 +85,11 @@ const Login = () => {
 
         <p className="text-center mt-4 text-sm text-gray-600">
           Don't have an account?{" "}
-          <Link to="/register" className="text-blue-600 hover:underline">
+          <Link
+            state={location?.state}
+            to="/register"
+            className="text-blue-600 hover:underline"
+          >
             Register Now
           </Link>
         </p>
