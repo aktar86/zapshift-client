@@ -1,20 +1,21 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
 
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm();
 
   const serviceCenters = useLoaderData();
   const regionsDuplicate = serviceCenters.map((center) => center.region);
   const regions = [...new Set(regionsDuplicate)];
-  const senderRegion = watch("senderRegion");
-  const receiverRegion = watch("receiverRegion");
+  const senderRegion = useWatch({ control, name: "senderRegion" });
+  const receiverRegion = useWatch({ control, name: "receiverRegion" });
 
   const districtbyRegion = (region) => {
     const regionDistricts = serviceCenters.filter((r) => r.region === region);
@@ -24,6 +25,47 @@ const SendParcel = () => {
 
   const handleSendParcel = (data) => {
     console.log(data);
+
+    const isSameDistrict = data.senderDistrict === data.receiverDistrict;
+    const isDocument = data.parcelType === "document";
+    const parcelWeight = data.parcelWeight;
+
+    let cost = 0;
+
+    if (isDocument) {
+      cost = isSameDistrict ? 60 : 80;
+    } else {
+      if (parcelWeight < 3) {
+        cost = isSameDistrict ? 110 : 150;
+      } else {
+        const minCharge = isSameDistrict ? 110 : 150;
+        const extraWeight = parcelWeight - 3;
+        const extraCharge = isSameDistrict
+          ? extraWeight * 40
+          : extraWeight * 40 + 40;
+
+        cost = minCharge + extraCharge;
+      }
+    }
+    console.log(cost);
+
+    Swal.fire({
+      title: "Agree with the cost?",
+      text: `You wll be charged ${cost} taka`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Submit it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "OK!",
+          text: "Your parcel has been placed.",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (

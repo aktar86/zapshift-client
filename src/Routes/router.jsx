@@ -18,6 +18,8 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: Root,
+    errorElement: <p>Loading...</p>,
+    hydrateFallbackElement: <p>Loading..</p>,
     children: [
       {
         index: true,
