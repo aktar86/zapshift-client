@@ -27,6 +27,9 @@ const NavBar = () => {
       <li>
         <NavLink to="/about_us/story">About Us</NavLink>
       </li>
+      <li>
+        <NavLink to="/send_a_parcel">Send Parcel</NavLink>
+      </li>
     </>
   );
   return (

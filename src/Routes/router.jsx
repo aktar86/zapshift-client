@@ -12,6 +12,7 @@ import Login from "../Pages/Auth/Login/Login";
 import Register from "../Pages/Auth/Register/Register";
 import PrivetRouter from "../privetRouter/PrivetRouter";
 import BeARider from "../Pages/BeARider/BeARider";
+import SendParcel from "../Pages/SendParcel/SendParcel";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,15 @@ const router = createBrowserRouter([
         element: (
           <PrivetRouter>
             <BeARider></BeARider>
+          </PrivetRouter>
+        ),
+      },
+      {
+        path: "send_a_parcel",
+        loader: () => fetch("/servicesCenter.json").then((res) => res.json()),
+        element: (
+          <PrivetRouter>
+            <SendParcel></SendParcel>
           </PrivetRouter>
         ),
       },
