@@ -2,8 +2,13 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAuth from "../../hook/useAuth";
+import useAxiosSecure from "../../hook/useAxiosSecure";
 
 const SendParcel = () => {
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  console.log(user);
   const {
     register,
     handleSubmit,
@@ -59,11 +64,16 @@ const SendParcel = () => {
       confirmButtonText: "Yes, Submit it",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          title: "OK!",
-          text: "Your parcel has been placed.",
-          icon: "success",
+        //save the data on database
+        axiosSecure.post("/parcels", data).then((res) => {
+          console.log(res.data);
         });
+
+        // Swal.fire({
+        //   title: "OK!",
+        //   text: "Your parcel has been placed.",
+        //   icon: "success",
+        // });
       }
     });
   };
@@ -153,10 +163,26 @@ const SendParcel = () => {
                 type="text"
                 placeholder="Sender Name"
                 {...register("sendarName", { required: true })}
+                defaultValue={`${user?.displayName}`}
                 className="w-full border border-gray-300 outline-0 py-2 focus:ring focus:ring-green-600 px-2"
               />
               {errors.sendarName?.type === "required" && (
                 <p className="text-red-500">Name is required</p>
+              )}
+            </fieldset>
+
+            {/* sender Email */}
+            <fieldset className="flex-1">
+              <legend className="text-sm font-bold">Sender Email</legend>
+              <input
+                type="email"
+                placeholder="Sender Email"
+                {...register("sendarEmail", { required: true })}
+                defaultValue={`${user?.email}`}
+                className="w-full border border-gray-300 outline-0 py-2 focus:ring focus:ring-green-600 px-2"
+              />
+              {errors.sendarEmail?.type === "required" && (
+                <p className="text-red-500">Mail is required</p>
               )}
             </fieldset>
 
@@ -222,6 +248,20 @@ const SendParcel = () => {
               />
               {errors.receiverName?.type === "required" && (
                 <p className="text-red-500">Receiver Name is required</p>
+              )}
+            </fieldset>
+
+            {/* Receiver Email */}
+            <fieldset className="flex-1">
+              <legend className="text-sm font-bold">Receiver Email</legend>
+              <input
+                type="email"
+                placeholder="Receiver Email"
+                {...register("receiverEmail", { required: true })}
+                className="w-full border border-gray-300 outline-0 py-2 focus:ring focus:ring-green-600 px-2"
+              />
+              {errors.receiverEmail?.type === "required" && (
+                <p className="text-red-500">Mail is required</p>
               )}
             </fieldset>
 

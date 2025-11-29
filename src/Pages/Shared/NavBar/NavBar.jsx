@@ -30,6 +30,13 @@ const NavBar = () => {
       <li>
         <NavLink to="/send_a_parcel">Send Parcel</NavLink>
       </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/dashboard/my-parcels">My Parcel</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
