@@ -15,6 +15,7 @@ import BeARider from "../Pages/BeARider/BeARider";
 import SendParcel from "../Pages/SendParcel/SendParcel";
 import DashboardLayout from "../Layout/DashboardLayout";
 import MyParcels from "../Pages/Dashboard/MyParcels/MyParcels";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -99,8 +100,12 @@ const router = createBrowserRouter([
         path: "my-parcels",
         Component: MyParcels,
       },
+      {
+        path: "payment/:parcelId",
+        Component: Payment,
+      },
     ],
   },
 ]);
 
-export default router;
+export default router; 

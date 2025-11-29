@@ -3,18 +3,51 @@ import React from "react";
 import useAuth from "../../../hook/useAuth";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
 import "./MyParcel.css";
+import { FaEdit } from "react-icons/fa";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyParcels = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data: parcels = [] } = useQuery({
+  const { data: parcels = [], refetch } = useQuery({
     queryKey: ["my-parcels", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/parcels?email=${user.email}`);
       return res.data;
     },
   });
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // delete api call
+        axiosSecure.delete(`/parcels/${id}`).then((res) => {
+          console.log(res.data);
+          if (res.data.deletedCount) {
+            // refresh the data in the UI
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Parcel Request has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+      }
+    });
+  };
   return (
     <div>
       <h1>My Parcels: {parcels.length}</h1>
@@ -22,22 +55,50 @@ const MyParcels = () => {
         <table className="table">
           {/* head */}
           <thead>
-            <tr>
+            <tr className="text-center">
               <th>SL</th>
-              <th>Sendar Name</th>
-              <th>Receiver Name</th>
-              <th>Weight</th>
-              <th>Status</th>
+              <th>Name</th>
+              <th>Cost</th>
+              <th>Payment</th>
+              <th>Delivery Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="text-center">
             {parcels.map((parcel, index) => (
-              <tr className="bg-base-200">
+              <tr key={parcel._id} className="bg-base-200">
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>{`${(parcel.cost && parcel.cost) || "-"}`}</td>
-                <td>{parcel.parcelWeight}</td>
-                <td>Send</td>
+                <td>
+                  {parcel.deliveryStatus === "Paid" ? (
+                    <span className="text-green-500">Paid</span>
+                  ) : (
+                    <Link
+                      to={`/dashboard/payment/${parcel._id}`}
+                      className="bg-primary btn-square btn"
+                    >
+                      Pay
+                    </Link>
+                  )}
+                </td>
+                <td>{parcel.deliveryStatus}</td>
+                <td className="">
+                  <button className="btn btn-square ">
+                    <FaEdit />
+                  </button>
+
+                  <button className="btn btn-square mx-2">
+                    <FaMagnifyingGlass />
+                  </button>
+
+                  <button
+                    onClick={() => handleDelete(parcel._id)}
+                    className="btn btn-square "
+                  >
+                    <MdDelete />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -48,3 +109,7 @@ const MyParcels = () => {
 };
 
 export default MyParcels;
+
+
+
+
