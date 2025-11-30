@@ -21,6 +21,25 @@ const MyParcels = () => {
     },
   });
 
+  const handleOnPagePayment = async (parcel) => {
+    console.log("hello");
+
+    const paymentInfo = {
+      cost: parcel.cost,
+      parcelId: parcel._id,
+      sendarEmail: parcel.sendarEmail,
+      parcelName: parcel.parcelName,
+    };
+    console.log(paymentInfo);
+
+    const res = await axiosSecure.post(
+      "/payment-checkout-session",
+      paymentInfo
+    );
+    console.log(res.data);
+    window.location.assign(res.data.url);
+  };
+
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -74,12 +93,20 @@ const MyParcels = () => {
                   {parcel.deliveryStatus === "Paid" ? (
                     <span className="text-green-500">Paid</span>
                   ) : (
-                    <Link
-                      to={`/dashboard/payment/${parcel._id}`}
-                      className="bg-primary btn-square btn"
+                    // <Link
+                    //   to={`/dashboard/payment/${parcel._id}`}
+                    //   className="bg-primary btn-square btn"
+                    // >
+                    //   Pay
+                    // </Link>
+
+                    // btn for onpage payment
+                    <button
+                      onClick={() => handleOnPagePayment(parcel)}
+                      className="bg-primary  btn"
                     >
-                      Pay
-                    </Link>
+                      Pay 2
+                    </button>
                   )}
                 </td>
                 <td>{parcel.deliveryStatus}</td>
@@ -109,7 +136,3 @@ const MyParcels = () => {
 };
 
 export default MyParcels;
-
-
-
-
