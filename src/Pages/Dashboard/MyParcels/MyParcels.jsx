@@ -30,7 +30,7 @@ const MyParcels = () => {
       sendarEmail: parcel.sendarEmail,
       parcelName: parcel.parcelName,
     };
-    console.log(paymentInfo);
+    console.log("paymentInfo:", paymentInfo);
 
     const res = await axiosSecure.post(
       "/payment-checkout-session",

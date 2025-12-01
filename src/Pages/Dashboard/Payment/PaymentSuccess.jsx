@@ -8,7 +8,7 @@ const PaymentSuccess = () => {
   const [paymentInfo, setPaymentInfo] = useState();
   const sessionId = searchParams.get("session_id");
   // console.log(sessionId);
-  // console.log(paymentInfo);
+  console.log("paymentInfo:", paymentInfo);
 
   useEffect(() => {
     if (sessionId) {
