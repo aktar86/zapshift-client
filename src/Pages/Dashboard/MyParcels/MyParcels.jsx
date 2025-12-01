@@ -91,15 +91,10 @@ const MyParcels = () => {
                 <td>{`${(parcel.cost && parcel.cost) || "-"}`}</td>
                 <td>
                   {parcel.deliveryStatus === "Paid" ? (
-                    <span className="text-green-500">Paid</span>
+                    <span className="text-green-500">
+                      {parcel.deliveryStatus}
+                    </span>
                   ) : (
-                    // <Link
-                    //   to={`/dashboard/payment/${parcel._id}`}
-                    //   className="bg-primary btn-square btn"
-                    // >
-                    //   Pay
-                    // </Link>
-
                     // btn for onpage payment
                     <button
                       onClick={() => handleOnPagePayment(parcel)}
@@ -136,3 +131,10 @@ const MyParcels = () => {
 };
 
 export default MyParcels;
+
+// <Link
+//   to={`/dashboard/payment/${parcel._id}`}
+//   className="bg-primary btn-square btn"
+// >
+//   Pay
+// </Link>
