@@ -1,4 +1,4 @@
-import { Home, Menu, Settings, Truck } from "lucide-react";
+import { CreditCardIcon, Home, Menu, Settings, Truck } from "lucide-react";
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
 
@@ -60,6 +60,18 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
 
+            {/* List item */}
+            <li>
+              <NavLink
+                to="/dashboard/payment-history"
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                data-tip="Settings"
+              >
+                {/* icon */}
+                <CreditCardIcon></CreditCardIcon>
+                <span className="is-drawer-close:hidden">Payment History</span>
+              </NavLink>
+            </li>
             {/* List item */}
             <li>
               <button

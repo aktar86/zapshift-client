@@ -88,10 +88,7 @@ const SendParcel = () => {
         <h3 className="font-bold text-lg mb-5">Enter Your Parcel Details</h3>
       </span>
 
-      <form
-        onSubmit={handleSubmit(handleSendParcel)}
-        className="border border-gray-100 p-5"
-      >
+      <form onSubmit={handleSubmit(handleSendParcel)} className=" p-5">
         {/* document non document check */}
         <div className="flex items-center gap-8 my-5">
           {/* Document */}
@@ -125,7 +122,7 @@ const SendParcel = () => {
         </div>
 
         {/* name and weight */}
-        <div className="flex flex-col md:flex-row gap-4  mb-5 border-t-2 pt-3 border-gray-200 ">
+        <div className="flex flex-col md:flex-row gap-4  mb-5 border-t-2 pt-3 border-gray-600 ">
           {/* name */}
           <fieldset className="flex-1">
             <legend className="text-sm font-bold">Parcel Name</legend>
@@ -155,7 +152,7 @@ const SendParcel = () => {
         </div>
 
         {/* --Details-- */}
-        <div className="flex gap-4 border-t-2 pt-3 border-gray-200">
+        <div className="flex gap-4  pt-3 border-t-2 border-gray-600">
           {/* sendar details */}
           <div className="flex-1 space-y-2">
             {/* sender name */}
