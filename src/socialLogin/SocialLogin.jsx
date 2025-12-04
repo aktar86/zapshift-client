@@ -15,14 +15,17 @@ const SocialLogin = () => {
         console.log(result.user);
         navigate(location?.state || "/");
 
+        console.log(result.user.photoURL);
+
         const userInfo = {
           email: result.user.email,
           displayName: result.user.displayName,
-          photoURl: result.user.photoURl,
+          photoURl: result.user.photoURL,
         };
+        console.log(userInfo);
 
         axiosSecure.post("/users", userInfo).then((res) => {
-          console.log("user info:", res.data);
+          console.log("user Data has been stored:", res.data);
         });
       })
       .catch((err) => {

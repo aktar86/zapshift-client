@@ -27,10 +27,17 @@ const Brands = () => {
     randstad,
     star,
     start_people,
+    azamon,
+    azamon_vector,
+    casio,
+    moonstar,
+    randstad,
+    star,
+    start_people,
   ];
 
   return (
-    <div className="border my-20">
+    <div className="bg-white p-10 rounded-2xl my-20">
       <h1 className="font-bold text-3xl text-center my-10 ">
         We've helped thousand of sales teams
       </h1>
