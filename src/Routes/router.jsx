@@ -20,6 +20,8 @@ import PaymentSuccess from "../Pages/Dashboard/Payment/PaymentSuccess";
 import PaymentCancel from "../Pages/Dashboard/Payment/PaymentCancel";
 import PaymentHistry from "../Pages/Dashboard/PaymentHistry/PaymentHistry";
 import ApproveRider from "../Pages/Dashboard/ApproveRider/ApproveRider";
+import UserManagement from "../Pages/Dashboard/UserManagement/UserManagement";
+import AdminRoute from "../privetRouter/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -108,7 +110,21 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/approve-riders",
-        Component: ApproveRider,
+        // Component: ApproveRider,
+        element: (
+          <AdminRoute>
+            <ApproveRider></ApproveRider>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/user-management",
+        element: (
+          <AdminRoute>
+            <UserManagement></UserManagement>
+          </AdminRoute>
+        ),
+        // Component: UserManagement,
       },
       {
         path: "payment/:parcelId",

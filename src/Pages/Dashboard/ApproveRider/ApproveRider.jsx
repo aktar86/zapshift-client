@@ -16,9 +16,9 @@ const ApproveRider = () => {
     },
   });
 
-  const updateRiderStatus = (id, status) => {
-    const updateInfo = { status: status };
-    axiosSecure.patch(`/riders/${id}`, updateInfo).then((res) => {
+  const updateRiderStatus = (rider, status) => {
+    const updateInfo = { status: status, email: rider.email };
+    axiosSecure.patch(`/riders/${rider._id}`, updateInfo).then((res) => {
       if (res.data.modifiedCount) {
         refetch();
         Swal.fire({
@@ -32,12 +32,28 @@ const ApproveRider = () => {
     });
   };
 
-  const handleRiderApprove = (id) => {
-    updateRiderStatus(id, "approved");
+  const handleRiderApprove = (rider) => {
+    updateRiderStatus(rider, "approved");
   };
 
-  const handleRejection = (id) => {
-    updateRiderStatus(id, "rejected");
+  const handleRejection = (rider) => {
+    updateRiderStatus(rider, "rejected");
+  };
+
+  const handleRiderDelete = (rider) => {
+    axiosSecure.delete(`/riders/${rider._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.deletedCount) {
+        refetch();
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Rider has been deleted",
+          showConfirmButton: true,
+          timer: 2000,
+        });
+      }
+    });
   };
 
   return (
@@ -78,17 +94,20 @@ const ApproveRider = () => {
                 <td>{rider.riderWireHouse}</td>
                 <td>
                   <button
-                    onClick={() => handleRiderApprove(rider._id)}
+                    onClick={() => handleRiderApprove(rider)}
                     className="btn btn-square"
                   >
                     <UserCheck></UserCheck>
                   </button>
-                  <button className="btn btn-square ml-2">
+                  <button
+                    onClick={() => handleRejection(rider)}
+                    className="btn btn-square ml-2"
+                  >
                     <UserRoundMinus />
                   </button>
 
                   <button
-                    onClick={() => handleRejection(rider._id)}
+                    onClick={() => handleRiderDelete(rider)}
                     className="btn btn-square ml-2"
                   >
                     <Trash2 />

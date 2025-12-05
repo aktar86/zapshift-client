@@ -8,8 +8,11 @@ import {
 } from "lucide-react";
 import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
+import { FaUsers } from "react-icons/fa";
+import useRole from "../hook/useRole";
 
 const DashboardLayout = () => {
+  const { role } = useRole();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -67,18 +70,39 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
 
-            {/* List item */}
-            <li>
-              <NavLink
-                to="/dashboard/approve-riders"
-                className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                data-tip="Approve Riders"
-              >
-                {/* icon */}
-                <Motorbike></Motorbike>
-                <span className="is-drawer-close:hidden">Approve Riders</span>
-              </NavLink>
-            </li>
+            {role === "admin" && (
+              <>
+                {/* Approve Riders */}
+                <li>
+                  <NavLink
+                    to="/dashboard/approve-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Approve Riders"
+                  >
+                    {/* icon */}
+                    <Motorbike></Motorbike>
+                    <span className="is-drawer-close:hidden">
+                      Approve Riders
+                    </span>
+                  </NavLink>
+                </li>
+
+                {/* Users Management */}
+                <li>
+                  <NavLink
+                    to="/dashboard/user-management"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Users Management"
+                  >
+                    {/* icon */}
+                    <FaUsers />
+                    <span className="is-drawer-close:hidden">
+                      Users Management
+                    </span>
+                  </NavLink>
+                </li>
+              </>
+            )}
 
             {/* List item */}
             <li>
