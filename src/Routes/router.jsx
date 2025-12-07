@@ -22,6 +22,7 @@ import PaymentHistry from "../Pages/Dashboard/PaymentHistry/PaymentHistry";
 import ApproveRider from "../Pages/Dashboard/ApproveRider/ApproveRider";
 import UserManagement from "../Pages/Dashboard/UserManagement/UserManagement";
 import AdminRoute from "../privetRouter/AdminRoute";
+import AssignRiders from "../Pages/Dashboard/AssignRiders/AssignRiders";
 
 const router = createBrowserRouter([
   {
@@ -122,6 +123,15 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <UserManagement></UserManagement>
+          </AdminRoute>
+        ),
+        // Component: UserManagement,
+      },
+      {
+        path: "/dashboard/assign-riders",
+        element: (
+          <AdminRoute>
+            <AssignRiders></AssignRiders>
           </AdminRoute>
         ),
         // Component: UserManagement,

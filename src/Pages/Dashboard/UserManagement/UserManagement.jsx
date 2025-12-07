@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
 import UserIcon from "../../../assets/user.png";
 import { FaUserShield } from "react-icons/fa";
@@ -8,13 +8,13 @@ import Swal from "sweetalert2";
 // import useAuth from "../../../hook/useAuth";
 
 const UserManagement = () => {
-  // const { user } = useAuth();
-  // console.log(user);
   const axiosSecure = useAxiosSecure();
+  const [searchText, setSearchText] = useState("");
+
   const { refetch, data: users = [] } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", searchText],
     queryFn: async () => {
-      const res = await axiosSecure.get("/users");
+      const res = await axiosSecure.get(`/users?searchText=${searchText}`);
       return res.data;
     },
   });
@@ -60,6 +60,7 @@ const UserManagement = () => {
   return (
     <div>
       <h1 className="text-4xl font-bold">Users: {users.length} </h1>
+      <p>Search Text: {searchText}</p>
 
       {/* search bar  */}
       <div>
@@ -80,7 +81,12 @@ const UserManagement = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" required placeholder="Search" />
+          <input
+            onChange={(e) => setSearchText(e.target.value)}
+            type="search"
+            required
+            placeholder="Search"
+          />
         </label>
       </div>
 

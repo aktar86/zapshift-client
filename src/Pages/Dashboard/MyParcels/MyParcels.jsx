@@ -21,6 +21,7 @@ const MyParcels = () => {
     },
   });
 
+  console.log(parcels);
   const handleOnPagePayment = async (parcel) => {
     console.log("hello");
 
@@ -88,11 +89,12 @@ const MyParcels = () => {
               <tr key={parcel._id} className="bg-base-200">
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
-                <td>{`${(parcel.cost && parcel.cost) || "-"}`}</td>
+                <td>{parcel.cost}</td>
+
                 <td>
-                  {parcel.deliveryStatus === "Paid" ? (
+                  {parcel.paymentStatus === "Paid" ? (
                     <span className="text-green-500">
-                      {parcel.deliveryStatus}
+                      {parcel.paymentStatus}
                     </span>
                   ) : (
                     // btn for onpage payment

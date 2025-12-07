@@ -10,6 +10,8 @@ import React from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import { FaUsers } from "react-icons/fa";
 import useRole from "../hook/useRole";
+// import { MdOutlineElectricBike } from "react-icons/md";
+import { RiEBikeLine } from "react-icons/ri";
 
 const DashboardLayout = () => {
   const { role } = useRole();
@@ -83,6 +85,21 @@ const DashboardLayout = () => {
                     <Motorbike></Motorbike>
                     <span className="is-drawer-close:hidden">
                       Approve Riders
+                    </span>
+                  </NavLink>
+                </li>
+
+                {/* Assign Riders */}
+                <li>
+                  <NavLink
+                    to="/dashboard/assign-riders"
+                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                    data-tip="Assign Riders"
+                  >
+                    {/* icon */}
+                    <RiEBikeLine />
+                    <span className="is-drawer-close:hidden">
+                      Assign Riders
                     </span>
                   </NavLink>
                 </li>
