@@ -5,7 +5,7 @@ import useRole from "../hook/useRole";
 import { Loader } from "lucide-react";
 
 const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const { role, roleLoading } = useRole();
 
   if (loading || roleLoading) {
@@ -15,7 +15,7 @@ const AdminRoute = ({ children }) => {
   if (role !== "admin") {
     return <ForbiddenPage />;
   }
-  return <div></div>;
+  return children;
 };
 
 export default AdminRoute;

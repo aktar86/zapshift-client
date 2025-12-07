@@ -1,11 +1,13 @@
-import { timeoutManager, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import useAxiosSecure from "../../../hook/useAxiosSecure";
 import { Trash2, UserCheck, UserRoundMinus } from "lucide-react";
 import Swal from "sweetalert2";
-import { tileLayer } from "leaflet";
+// import useAuth from "../../../hook/useAuth";
 
 const ApproveRider = () => {
+  // const { user } = useAuth();
+  // console.log(user);
   const axiosSecure = useAxiosSecure();
 
   const { data: riders = [], refetch } = useQuery({

@@ -5,8 +5,11 @@ import UserIcon from "../../../assets/user.png";
 import { FaUserShield } from "react-icons/fa";
 import { FiShieldOff } from "react-icons/fi";
 import Swal from "sweetalert2";
+// import useAuth from "../../../hook/useAuth";
 
 const UserManagement = () => {
+  // const { user } = useAuth();
+  // console.log(user);
   const axiosSecure = useAxiosSecure();
   const { refetch, data: users = [] } = useQuery({
     queryKey: ["users"],
@@ -16,11 +19,11 @@ const UserManagement = () => {
     },
   });
 
-  const handleMakeUser = (user) => {
+  const handleMakeAdmin = (user) => {
     const roleInfo = { role: "admin" };
 
     //TODO: must ask for confirmation before proceed
-    axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
+    axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount) {
         refetch();
@@ -39,7 +42,7 @@ const UserManagement = () => {
     const roleInfo = { role: "user" };
 
     //TODO: must ask for confirmation before proceed
-    axiosSecure.patch(`/users/${user._id}`, roleInfo).then((res) => {
+    axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
       console.log(res.data);
       if (res.data.modifiedCount) {
         refetch();
@@ -57,6 +60,32 @@ const UserManagement = () => {
   return (
     <div>
       <h1 className="text-4xl font-bold">Users: {users.length} </h1>
+
+      {/* search bar  */}
+      <div>
+        <label className="input">
+          <svg
+            className="h-[1em] opacity-50"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </g>
+          </svg>
+          <input type="search" required placeholder="Search" />
+        </label>
+      </div>
+
+      {/* user table */}
+
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -114,7 +143,7 @@ const UserManagement = () => {
                     </button>
                   ) : (
                     <button
-                      onClick={() => handleMakeUser(user)}
+                      onClick={() => handleMakeAdmin(user)}
                       className="btn bg-green-500 text-white"
                     >
                       <FaUserShield />
